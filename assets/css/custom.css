@@ -354,3 +354,68 @@ th.cell-num {
   }
 }
 
+/* =========================================================
+   DECORATIVE CSS SHAPES (CIRCLES, TRIANGLES, SQUARES)
+   ========================================================= */
+
+.shape {
+  position: fixed;
+  z-index: -1;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+/* Circle */
+.shape-circle {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #a3ff6c, #0b7285);
+  top: 12%;
+  left: -40px;
+  animation: float-up-down 18s ease-in-out infinite;
+}
+
+/* Triangle */
+.shape-triangle {
+  width: 0;
+  height: 0;
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+  border-bottom: 120px solid rgba(11, 114, 133, 0.4);
+  bottom: -40px;
+  right: -10px;
+  animation: slow-rotate 26s linear infinite;
+}
+
+/* Square */
+.shape-square {
+  width: 90px;
+  height: 90px;
+  border-radius: 24px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  top: 40%;
+  right: 20%;
+  animation: float-up-down 22s ease-in-out infinite;
+}
+
+/* ========== Animations ========== */
+@keyframes float-up-down {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-30px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes slow-rotate {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .shape {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
