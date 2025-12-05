@@ -156,31 +156,67 @@
         </div>
 
         <!-- Contact Form -->
-        <form action="#" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="600">
-          <div class="row gy-4">
+        <form id="contact-form" class="php-email-form">
 
-            <div class="col-md-6">
-              <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
-            </div>
+  <div class="row gy-4">
+    <div class="col-md-6">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" name="name" id="name" class="form-control" required>
+    </div>
 
-            <div class="col-md-6">
-              <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
-            </div>
+    <div class="col-md-6">
+      <label for="surname" class="form-label">Surname</label>
+      <input type="text" name="surname" id="surname" class="form-control" required>
+    </div>
 
-            <div class="col-md-12">
-              <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
-            </div>
+    <div class="col-md-6">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" name="email" id="email" class="form-control" required>
+    </div>
 
-            <div class="col-md-12">
-              <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-            </div>
+    <div class="col-md-6">
+      <label for="phone" class="form-label">Phone number</label>
+      <input type="tel" name="phone" id="phone" class="form-control" required>
+    </div>
 
-            <div class="col-md-12 text-center">
-              <button type="submit">Send Message</button>
-            </div>
+    <div class="col-12">
+      <label for="address" class="form-label">Address</label>
+      <input type="text" name="address" id="address" class="form-control" required>
+    </div>
 
-          </div>
-        </form>
+    <!-- Rating 1–10 (3 soru) -->
+    <div class="col-md-4">
+      <label for="rating1" class="form-label">Interface (1–10)</label>
+      <input type="number" min="1" max="10" id="rating1" class="form-control" required>
+    </div>
+
+    <div class="col-md-4">
+      <label for="rating2" class="form-label">Information (1–10)</label>
+      <input type="number" min="1" max="10" id="rating2" class="form-control" required>
+    </div>
+
+    <div class="col-md-4">
+      <label for="rating3" class="form-label">User-Friendly(1–10)</label>
+      <input type="number" min="1" max="10" id="rating3" class="form-control" required>
+    </div>
+
+    <div class="col-12 text-center">
+      <button type="submit" class="btn btn-primary btn-animated mt-3" id="contact-submit">
+        Submit
+      </button>
+    </div>
+  </div>
+
+</form>
+
+<!-- Form sonuçlarının gösterileceği yer -->
+<div id="form-results" class="form-results mt-4"></div>
+
+<!-- Popup mesaj -->
+<div id="form-popup" class="form-popup">
+  Form submitted successfully!
+</div>
+
         <!-- End Contact Form -->
 
       </div>
@@ -229,6 +265,7 @@
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
 
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/custom.js"></script>
 
 </body>
 </html>

@@ -361,7 +361,7 @@ th.cell-num {
 .shape {
   position: fixed;
   z-index: 0;
-  opacity: 0.18;
+  opacity: 1;
   pointer-events: none;
 }
 
@@ -372,7 +372,7 @@ th.cell-num {
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, #a3ff6c, #0b7285);
   top: 12%;
-  left: -40px;
+  left: -30px;
   animation: float-up-down 18s ease-in-out infinite;
 }
 
@@ -383,7 +383,7 @@ th.cell-num {
   border-left: 80px solid transparent;
   border-right: 80px solid transparent;
   border-bottom: 120px solid rgba(11, 114, 133, 0.4);
-  bottom: -40px;
+  bottom: 130px;
   right: -10px;
   animation: slow-rotate 26s linear infinite;
 }
@@ -512,3 +512,110 @@ th.cell-num {
 .resume-page .resume-item p {
   color: #ffffff !important;
 }
+
+/* =========================================================
+   LAB 5 - CONTACT FORM STYLES & POPUP
+   ========================================================= */
+
+/* Form alanları arası boşluk & düzen */
+#contact-form .form-label {
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+#contact-form .form-control {
+  border-radius: 0.6rem;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid rgba(0,0,0,0.12);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+/* Rating inputs */
+#contact-form input[type="number"] {
+  text-align: center;
+}
+
+/* Result box */
+.form-results {
+  padding: 1.2rem 1.4rem;
+  border-radius: 0.8rem;
+  background: rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.06);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  white-space: pre-line; 
+}
+
+
+.avg-low {
+  color: #e03131;    
+  font-weight: 700;
+}
+
+.avg-mid {
+  color: #f08c00;   
+  font-weight: 700;
+}
+
+.avg-high {
+  color: #2f9e44;   
+  font-weight: 700;
+}
+
+
+.form-popup {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  padding: 0.9rem 1.4rem;
+  border-radius: 999px;
+  background: linear-gradient(120deg, #12b886, #40c057);
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: 0.3s ease;
+  z-index: 9999;
+}
+
+.form-popup.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Hareket azaltma ayarı varsa popup animasyonu minimum olsun */
+@media (prefers-reduced-motion: reduce) {
+  .form-popup {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.avg-low {
+  color: #ff4d4d;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(255, 40, 40, 0.9),
+               0 0 20px rgba(255, 40, 40, 0.6);
+}
+
+.avg-mid {
+  color: #ffb200;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(255, 178, 0, 0.9),
+               0 0 20px rgba(255, 178, 0, 0.6);
+}
+
+.avg-high {
+  color: #4dff4d;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(77, 255, 77, 0.9),
+               0 0 20px rgba(77, 255, 77, 0.6);
+}
+
