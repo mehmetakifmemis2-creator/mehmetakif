@@ -460,3 +460,55 @@ th.cell-num {
   color: #fff !important;
 }
 
+/* ------------------------------
+   CONTACT PAGE OVERRIDE
+   ------------------------------ */
+
+.contact-page .page-title h1,
+.contact-page .page-title p,
+.contact-page .breadcrumbs,
+.contact-page .breadcrumbs a,
+.contact-page .breadcrumbs .current {
+  color: #ffffff !important;
+}
+
+.contact-page .contact.section h2,
+.contact-page .contact.section p,
+.contact-page .contact.section li,
+.contact-page .contact.section strong,
+.contact-page .contact.section span {
+  color: #ffffff !important;
+}
+
+/* ------------------------------
+   RESUME PAGE OVERRIDE
+   ------------------------------ */
+
+.resume-page .page-title h1,
+.resume-page .page-title p,
+.resume-page .breadcrumbs,
+.resume-page .breadcrumbs a,
+.resume-page .breadcrumbs .current {
+  color: #ffffff !important;
+}
+
+.resume-page .resume.section h2,
+.resume-page .resume.section p,
+.resume-page .resume.section li,
+.resume-page .resume.section strong,
+.resume-page .resume.section span {
+  color: #ffffff !important;
+}
+
+/* Resume item cards (istersen) */
+.resume-page .resume-item {
+  background: #111 !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+}
+
+.resume-page .resume-item h4,
+.resume-page .resume-item h5,
+.resume-page .resume-item p {
+  color: #ffffff !important;
+}
