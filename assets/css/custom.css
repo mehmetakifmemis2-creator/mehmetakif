@@ -60,7 +60,7 @@ a:hover { color: #099268; text-decoration: underline; }
 a:active { color: #0c8599; }
 
 .navmenu a {
-  color: #e3fafc;
+  color: #000000;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-size: .8rem;
@@ -417,5 +417,46 @@ th.cell-num {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+
+/* =========================================================
+   PORTFOLIO PAGE DARK MODE OVERRIDE
+   ========================================================= */
+
+.portfolio-page {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+.portfolio-page .page-title h1,
+.portfolio-page .page-title p,
+.portfolio-page .breadcrumbs,
+.portfolio-page .breadcrumbs a,
+.portfolio-page .breadcrumbs .current {
+  color: #ffffff !important;
+}
+
+.portfolio-page .section {
+  background: #000 !important;
+}
+
+.portfolio-page p,
+.portfolio-page h1,
+.portfolio-page h2,
+.portfolio-page h3,
+.portfolio-page span {
+  color: #ffffff !important;
+}
+
+/* Kartları beyaz tutmak istersen kapat — tam black mode olsun dersen aç */
+.portfolio-page .portfolio-item {
+  background: #111 !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #fff !important;
+}
+
+.portfolio-page .portfolio-item p,
+.portfolio-page .portfolio-item h4 {
+  color: #fff !important;
 }
 
