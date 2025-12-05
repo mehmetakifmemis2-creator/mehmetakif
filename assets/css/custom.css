@@ -360,7 +360,7 @@ th.cell-num {
 
 .shape {
   position: fixed;
-  z-index: -1;
+  z-index: 0;
   opacity: 0.18;
   pointer-events: none;
 }
