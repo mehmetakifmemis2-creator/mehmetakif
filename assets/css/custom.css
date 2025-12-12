@@ -660,3 +660,35 @@ th.cell-num {
   color: #00ffcc;
   font-size: 18px;
 }
+
+/* === FIX: MEMORY BOARD NOT VISIBLE === */
+
+.memory-layout {
+  display: grid !important;
+  grid-template-columns: 1fr 300px !important;
+  gap: 20px;
+}
+
+.memory-board-wrap {
+  width: 100%;
+}
+
+.memory-board {
+  width: 100%;
+  min-height: 300px;
+  display: grid !important;
+  gap: 12px;
+}
+
+.mg-card {
+  width: 100%;
+  height: 100%;
+  min-height: 80px;
+  background: #111;
+}
+
+@media (max-width: 992px) {
+  .memory-layout {
+    grid-template-columns: 1fr !important;
+  }
+}
