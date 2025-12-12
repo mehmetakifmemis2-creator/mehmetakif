@@ -196,6 +196,45 @@
     </div>
   </section>
 
+  <!-- ===== Memory Game Section ===== -->
+<section id="memory-game" class="memory-game section">
+  <div class="container">
+    <div class="section-title">
+      <h2>Memory Game</h2>
+      <p>Flip cards and find all matching pairs.</p>
+    </div>
+
+    <div class="memory-controls">
+      <label for="mg-difficulty" class="mg-label">Difficulty:</label>
+      <select id="mg-difficulty" class="mg-select">
+        <option value="easy" selected>Easy (4×3)</option>
+        <option value="hard">Hard (6×4)</option>
+      </select>
+
+      <button id="mg-start" class="mg-btn" type="button">Start</button>
+      <button id="mg-restart" class="mg-btn mg-btn-secondary" type="button" disabled>Restart</button>
+    </div>
+
+    <div class="memory-layout">
+      <div class="memory-board-wrap">
+        <div id="mg-board" class="memory-board"></div>
+        <div id="mg-win" class="mg-win"></div>
+      </div>
+
+      <div class="memory-stats">
+        <h3>Stats</h3>
+        <p>Moves: <span id="mg-moves">0</span></p>
+        <p>Matches: <span id="mg-matches">0</span></p>
+        <p>Time: <span id="mg-timer">00:00</span></p>
+        <hr>
+        <p>Best (Easy): <span id="mg-best-easy">—</span></p>
+        <p>Best (Hard): <span id="mg-best-hard">—</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
   </main>
 
   <footer id="footer" class="footer dark-background">
