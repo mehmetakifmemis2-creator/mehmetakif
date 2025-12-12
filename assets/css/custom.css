@@ -619,3 +619,44 @@ th.cell-num {
                0 0 20px rgba(77, 255, 77, 0.6);
 }
 
+/* === FORCE VISIBILITY FOR DARK TEMPLATE === */
+
+#memory-game {
+  background: rgba(255,255,255,0.03);
+  padding: 40px 0;
+}
+
+.memory-board {
+  min-height: 200px;
+}
+
+.mg-card {
+  background: #111;
+}
+
+.mg-face {
+  background: #1e1e1e;
+  color: #fff;
+  font-weight: bold;
+}
+
+.mg-front {
+  background: #2a2a2a;
+  color: #00ffcc;
+}
+
+.mg-back {
+  background: #111;
+  color: #ffffff;
+  font-size: 36px;
+}
+
+.memory-stats {
+  background: #111;
+  color: #fff;
+}
+
+.mg-win {
+  color: #00ffcc;
+  font-size: 18px;
+}
