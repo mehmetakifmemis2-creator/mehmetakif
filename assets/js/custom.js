@@ -249,8 +249,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("Memory Game JS loaded");
-
   const difficultyEl = document.getElementById("mg-difficulty");
   const startBtn = document.getElementById("mg-start");
   const restartBtn = document.getElementById("mg-restart");
@@ -259,10 +257,17 @@ document.addEventListener("DOMContentLoaded", function () {
   const matchesEl = document.getElementById("mg-matches");
   const winEl = document.getElementById("mg-win");
 
-  if (!difficultyEl || !startBtn || !boardEl) {
-    console.error("Memory Game elements missing");
-    return;
-  }
+  // Optional UI
+  const timerEl = document.getElementById("mg-timer");
+  const bestEasyEl = document.getElementById("mg-best-easy");
+  const bestHardEl = document.getElementById("mg-best-hard");
+
+  console.log("MG init:", {
+    difficultyEl, startBtn, restartBtn, boardEl,
+    timerEl, bestEasyEl, bestHardEl
+  });
+
+  if (!difficultyEl || !startBtn || !restartBtn || !boardEl) return;
 
   const DATA = ["🍕", "⚽", "🚗", "🎧", "🎮", "📚", "⭐", "🎲", "🚀", "🧠", "🧩", "🌍"];
 
@@ -273,8 +278,72 @@ document.addEventListener("DOMContentLoaded", function () {
   let matches = 0;
   let totalPairs = 0;
 
+  // ===== Optional: Timer =====
+  let timerId = null;
+  let seconds = 0;
+
+  function formatTime(s) {
+    const mm = String(Math.floor(s / 60)).padStart(2, "0");
+    const ss = String(s % 60).padStart(2, "0");
+    return `${mm}:${ss}`;
+  }
+
+  function stopTimer() {
+    if (timerId) clearInterval(timerId);
+    timerId = null;
+  }
+
+  function resetTimer() {
+    stopTimer();
+    seconds = 0;
+    if (timerEl) timerEl.textContent = "00:00";
+  }
+
+  function startTimer() {
+    // Start is clicked => timer starts (stopwatch)
+    resetTimer();
+    if (!timerEl) return;
+    timerId = setInterval(() => {
+      seconds++;
+      timerEl.textContent = formatTime(seconds);
+    }, 1000);
+  }
+
+  // ===== Optional: Best score per difficulty =====
+  function bestKey(diff) {
+    return diff === "easy" ? "mg_best_easy_moves" : "mg_best_hard_moves";
+  }
+
+  function loadBestScores() {
+    if (!bestEasyEl || !bestHardEl) return;
+
+    const e = localStorage.getItem(bestKey("easy"));
+    const h = localStorage.getItem(bestKey("hard"));
+
+    bestEasyEl.textContent = e ? `${e} moves` : "—";
+    bestHardEl.textContent = h ? `${h} moves` : "—";
+  }
+
+  function updateBestScoreIfBetter() {
+    const diff = difficultyEl.value;
+    const key = bestKey(diff);
+
+    const current = moves; // fewest moves wins
+    const prevStr = localStorage.getItem(key);
+    const prev = prevStr ? Number(prevStr) : null;
+
+    if (prev === null || Number.isNaN(prev) || current < prev) {
+      localStorage.setItem(key, String(current));
+    }
+    loadBestScores(); // update display
+  }
+
   function shuffle(arr) {
-    return arr.sort(() => Math.random() - 0.5);
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
   }
 
   function resetStats() {
@@ -288,13 +357,14 @@ document.addEventListener("DOMContentLoaded", function () {
   function createBoard() {
     boardEl.innerHTML = "";
     resetStats();
+
     firstCard = null;
     secondCard = null;
     lock = false;
 
     const diff = difficultyEl.value;
-    let cols = diff === "easy" ? 4 : 6;
-    let rows = diff === "easy" ? 3 : 4;
+    const cols = diff === "easy" ? 4 : 6;
+    const rows = diff === "easy" ? 3 : 4;
 
     boardEl.style.display = "grid";
     boardEl.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
@@ -303,15 +373,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const pairCount = (cols * rows) / 2;
     totalPairs = pairCount;
 
-    let symbols = shuffle(DATA.slice(0, pairCount));
-    let cards = shuffle([...symbols, ...symbols]);
+    const symbols = DATA.slice(0, pairCount);
+    const deck = shuffle([...symbols, ...symbols]);
 
-    cards.forEach(symbol => {
+    deck.forEach(symbol => {
       const card = document.createElement("div");
       card.className = "mg-card";
       card.textContent = "?";
       card.dataset.symbol = symbol;
 
+      // inline styles to avoid template conflicts
       card.style.height = "80px";
       card.style.background = "#222";
       card.style.color = "#00ffcc";
@@ -321,6 +392,7 @@ document.addEventListener("DOMContentLoaded", function () {
       card.style.fontSize = "28px";
       card.style.cursor = "pointer";
       card.style.borderRadius = "10px";
+      card.style.userSelect = "none";
 
       card.addEventListener("click", () => flipCard(card));
       boardEl.appendChild(card);
@@ -341,18 +413,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
     secondCard = card;
     lock = true;
+
     moves++;
-    movesEl.textContent = moves;
+    movesEl.textContent = String(moves);
 
     if (firstCard.dataset.symbol === secondCard.dataset.symbol) {
       firstCard.classList.add("matched");
       secondCard.classList.add("matched");
+
       matches++;
-      matchesEl.textContent = matches;
+      matchesEl.textContent = String(matches);
+
       resetTurn();
 
       if (matches === totalPairs) {
-        winEl.textContent = "🎉 You win!";
+        winEl.textContent = `🎉 You win! Moves: ${moves} Time: ${timerEl ? timerEl.textContent : "—"}`;
+        stopTimer();                 // must stop on win
+        updateBestScoreIfBetter();    // best per difficulty
       }
     } else {
       setTimeout(() => {
@@ -369,12 +446,26 @@ document.addEventListener("DOMContentLoaded", function () {
     lock = false;
   }
 
+  // Events
   startBtn.addEventListener("click", () => {
     createBoard();
+    startTimer();               // timer must start on Start
     restartBtn.disabled = false;
   });
 
   restartBtn.addEventListener("click", () => {
     createBoard();
+    startTimer();               // resets on Restart (reset+start)
   });
+
+  difficultyEl.addEventListener("change", () => {
+    // required: reset when difficulty changes
+    createBoard();
+    resetTimer();
+    restartBtn.disabled = true;
+  });
+
+  // Init
+  loadBestScores();  // must read on page load
+  resetTimer();      // show 00:00 on load
 });
